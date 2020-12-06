@@ -147,6 +147,8 @@ func (s *SmartContract) TransferAsset(ctx contractapi.TransactionContextInterfac
 		return err
 	}
 
+	ctx.GetStub().SetEvent("basicTestEvent", []byte(fmt.Sprintf("Transferring asset %s: from owner %s to %s", id, asset.Owner, newOwner)))
+
 	asset.Owner = newOwner
 	assetJSON, err := json.Marshal(asset)
 	if err != nil {
